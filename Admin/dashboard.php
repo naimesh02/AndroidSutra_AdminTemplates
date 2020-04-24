@@ -109,7 +109,7 @@ if($_SESSION["username"]!=''){
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
-                        <div class="product-sales-chart">
+                       <!--  <div class="product-sales-chart">
                             <div class="portlet-title">
                                 <div class="row">
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
@@ -179,7 +179,7 @@ if($_SESSION["username"]!=''){
                                 </li>
                                 <li class="text-right"><i class="fa fa-level-down" aria-hidden="true"></i> <span class="text-danger">18%</span></li>
                             </ul>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
@@ -245,129 +245,7 @@ if($_SESSION["username"]!=''){
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                        <div class="single-new-trend mg-t-30">
-                            <a href="#"><img src="img/new-product/5.jpg" alt=""></a>
-                            <div class="overlay-content">
-                                <a href="#">
-                                    <h2>$280</h2>
-                                </a>
-                                <a href="#" class="btn-small">Now</a>
-                                <div class="product-action">
-                                    <ul>
-                                        <li>
-                                            <a data-toggle="tooltip" title="Shopping" href="#"><i class="fa fa-shopping-bag" aria-hidden="true"></i></a>
-                                        </li>
-                                        <li>
-                                            <a data-toggle="tooltip" title="Quick view" href="#"><i class="fa fa-heart" aria-hidden="true"></i></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <a href="#">
-                                    <h4>Princes Diamond</h4>
-                                </a>
-                                <div class="pro-rating">
-                                    <i class="fa fa-star color"></i>
-                                    <i class="fa fa-star color"></i>
-                                    <i class="fa fa-star color"></i>
-                                    <i class="fa fa-star color"></i>
-                                    <i class="fa fa-star"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                        <div class="single-new-trend mg-t-30">
-                            <a href="#"><img src="img/new-product/6.jpg" alt=""></a>
-                            <div class="overlay-content">
-                                <a href="#">
-                                    <h2>$280</h2>
-                                </a>
-                                <a href="#" class="btn-small">Now</a>
-                                <div class="product-action">
-                                    <ul>
-                                        <li>
-                                            <a data-toggle="tooltip" title="Shopping" href="#"><i class="fa fa-shopping-bag" aria-hidden="true"></i></a>
-                                        </li>
-                                        <li>
-                                            <a data-toggle="tooltip" title="Quick view" href="#"><i class="fa fa-heart" aria-hidden="true"></i></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <a href="#">
-                                    <h4>Princes Diamond</h4>
-                                </a>
-                                <div class="pro-rating">
-                                    <i class="fa fa-star color"></i>
-                                    <i class="fa fa-star color"></i>
-                                    <i class="fa fa-star color"></i>
-                                    <i class="fa fa-star color"></i>
-                                    <i class="fa fa-star"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                        <div class="single-new-trend mg-t-30">
-                            <a href="#"><img src="img/new-product/7.jpg" alt=""></a>
-                            <div class="overlay-content">
-                                <a href="#">
-                                    <h2>$280</h2>
-                                </a>
-                                <a href="#" class="btn-small">Now</a>
-                                <div class="product-action">
-                                    <ul>
-                                        <li>
-                                            <a data-toggle="tooltip" title="Shopping" href="#"><i class="fa fa-shopping-bag" aria-hidden="true"></i></a>
-                                        </li>
-                                        <li>
-                                            <a data-toggle="tooltip" title="Quick view" href="#"><i class="fa fa-heart" aria-hidden="true"></i></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <a href="#">
-                                    <h4>Princes Diamond</h4>
-                                </a>
-                                <div class="pro-rating">
-                                    <i class="fa fa-star color"></i>
-                                    <i class="fa fa-star color"></i>
-                                    <i class="fa fa-star color"></i>
-                                    <i class="fa fa-star color"></i>
-                                    <i class="fa fa-star"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                        <div class="single-new-trend mg-t-30">
-                            <a href="#"><img src="img/new-product/5.jpg" alt=""></a>
-                            <div class="overlay-content">
-                                <a href="#">
-                                    <h2>$280</h2>
-                                </a>
-                                <a href="#" class="btn-small">Now</a>
-                                <div class="product-action">
-                                    <ul>
-                                        <li>
-                                            <a data-toggle="tooltip" title="Shopping" href="#"><i class="fa fa-shopping-bag" aria-hidden="true"></i></a>
-                                        </li>
-                                        <li>
-                                            <a data-toggle="tooltip" title="Quick view" href="#"><i class="fa fa-heart" aria-hidden="true"></i></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <a href="#">
-                                    <h4>Princes Diamond</h4>
-                                </a>
-                                <div class="pro-rating">
-                                    <i class="fa fa-star color"></i>
-                                    <i class="fa fa-star color"></i>
-                                    <i class="fa fa-star color"></i>
-                                    <i class="fa fa-star color"></i>
-                                    <i class="fa fa-star"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    
                 </div>
             </div>
         </div>
@@ -378,12 +256,8 @@ if($_SESSION["username"]!=''){
                         <div class="product-sales-chart">
                             <div class="portlet-title">
                                 <div class="row">
-                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                        <div class="caption pro-sl-hd">
-                                            <span class="caption-subject text-uppercase"><b>Order Statistic</b></span>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                  
+                                  <!--   <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                         <div class="actions graph-rp">
                                             <a href="#" class="btn btn-dark-blue btn-circle active tip-top" data-toggle="tooltip" title="Upload">
 													<i class="fa fa-cloud-download" aria-hidden="true"></i>
@@ -432,14 +306,14 @@ if($_SESSION["username"]!=''){
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
         <div class="author-area-pro">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                        <div class="personal-info-wrap">
+                       <!--  <div class="personal-info-wrap">
                             <div class="widget-head-info-box">
                                 <div class="persoanl-widget-hd">
                                     <h2>Jon Royita</h2>
@@ -510,8 +384,8 @@ if($_SESSION["username"]!=''){
                                     <a class="btn btn-xs btn-primary"><i class="fa fa-heart"></i> Love</a>
                                 </div>
                             </div>
-                        </div>
-                    </div>
+                        </div>-->
+                    </div> 
                 </div>
             </div>
         </div>

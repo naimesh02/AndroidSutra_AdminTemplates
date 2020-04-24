@@ -740,7 +740,7 @@ ul.setting-panel-list li{
     background: #0B5790;
 }
 .header-top-menu .navbar-nav>li .dropdown-menu a:hover, .header-right-info ul.header-right-menu li .dropdown-header-top.author-log li a:hover, .header-right-info ul.header-right-menu li .dropdown-header-top.author-log li a:focus, .header-drl-controller-btn.btn-info:active:focus, .btn-info:active:hover {
-    background: #ad1e04;
+    background: #2691CA !important;
 }
 .header-right-info ul.header-right-menu li .message-view a, .header-right-info ul.header-right-menu li .notification-view a {
     border-top: 1px solid #c7290d;
