@@ -36,7 +36,7 @@
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="sparkline13-list">
-						<div  style="background-color:#AB1308; border:thick; border-radius:50px; height:30px; width:200px; text-align:center; font-size:17px; color:#FFFFFF;right:0;position:absolute; margin-right :40px;">
+						<div  style="background-color:#0B5790; border:thick; border-radius:50px; height:30px; width:200px; text-align:center; font-size:17px; color:#FFFFFF;right:0;position:absolute; margin-right :40px;">
 										
 										<a href="UpdateCategory.php"  style="color:#FFFFFF;">Add Record</a>
 										</div>
