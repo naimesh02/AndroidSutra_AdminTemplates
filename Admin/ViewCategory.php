@@ -53,8 +53,12 @@
                                         <thead  style="text-align:center">
                                              <tr>
                                                 <th data-field="state" data-checkbox="true"></th>
-                                                <th data-field="id">Category Name</th>
-                                                <th data-field="name" data-editable="true" >Category Data Type</th>
+                                                <th data-field="id">Title</th>
+                                                <th data-field="name" data-editable="true" >Category Name</th>
+												 <th data-field="name" data-editable="true">Description</th>
+                                                <th data-field="company">Image</th>
+                                                <th data-field="price">Video</th>
+												<th data-field="date" data-editable="true">Date</th>
                                                
                                                <th data-field="action">Action</th>
                                             </tr>
@@ -63,15 +67,16 @@
 										
                                         	
                                             <?php
-							   $sql="SELECT * FROM `tblcategory` ";
+							   $sql="SELECT * FROM `tblcategorydata`";
 							   $qry=mysqli_query($conn,$sql);
 							   while($res=mysqli_fetch_array($qry)){
-							   echo "<tr><td></td><td>".$res["categoryName"]."</td>";
-							    $data="select typeName from tbltype where id='".$res["data_id"]."'";
-							   $r=mysqli_query($conn,$data);
-							   $title=mysqli_fetch_assoc($r);
-							
-							   echo"<td>".$title["typeName"]."</td><td><a href=UpdateCategory.php?id=".$res["id"]."><img src='Images/pencil.png'></a>&nbsp;&nbsp;&nbsp;<a href=deleteCategory.php?id=".$res["id"]." onclick=\"return confirm('Are you sure to delete record?')\"><img src='Images/delete.png'></a></td></tr>";
+							   echo "<tr><td></td><td>".$res["title"]."</td><td>".$res["category_name"]."</td><td>".$res["description"]."</td>";?>
+							   <td><img src="upload/<?php echo $res['image'];?>" style="width:100px;height:100px"/></td><td>
+							   <?php
+							   if($res['video']!='' || $res['video']!=null) {
+							   echo "<iframe src=".$res["video"]."  style='width:70px;height:70px'></iframe>";
+							   } 
+							   echo "</td><td>".$res['storeDate']."</td><td><a href=Updatecategory.php?id=".$res["id"]."><img src='Images/pencil.png'></a>&nbsp;&nbsp;&nbsp;<a href=deletecategory.php?id=".$res["id"]." onclick=\"return confirm('Are you sure to delete record?')\"><img src='Images/delete.png'></a></td></tr>";
 							   }
 							   ?>
 			

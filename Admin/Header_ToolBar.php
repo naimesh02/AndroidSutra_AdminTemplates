@@ -96,7 +96,7 @@
                             <ul class="submenu-angle" aria-expanded="false">
                                 <li><a title="Google Map" href="ViewBlogs.php"><i class="fa fa-map-marker sub-icon-mg" aria-hidden="true"></i> <span class="mini-sub-pro">Blogs</span></a></li>
                                 <li><a title="Data Maps" href="ViewMagazine.php"><i class="fa fa-map-o sub-icon-mg" aria-hidden="true"></i> <span class="mini-sub-pro">Magazines</span></a></li>
-                                <li><a title="Pdf Viewer" href="ViewCategory.php"><i class="fa fa-file-pdf-o sub-icon-mg" aria-hidden="true"></i> <span class="mini-sub-pro">Category</span></a></li>
+                                <li><a title="Pdf Viewer" href="ViewCategory.php"><i class="fa fa-file-pdf-o sub-icon-mg" aria-hidden="true"></i> <span class="mini-sub-pro">CategoryData</span></a></li>
                                
                             </ul>
                         </li>

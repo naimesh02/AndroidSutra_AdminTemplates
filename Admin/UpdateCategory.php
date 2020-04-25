@@ -4,19 +4,35 @@
 		session_start();	
 		if(isset($_GET["id"])){
 					
-		$fetch="select  * from tblcategory where id='".$_GET["id"]."'";
+		$fetch="select  * from tblcategorydata where id='".$_GET["id"]."'";
 			$row=mysqli_query($conn,$fetch);
 			while($r=mysqli_fetch_array($row)){
-				$title=$r["categoryName"];
-				$type=$r["data_id"];
+				$title=$r["title"];
+				$cate_name=$r["category_name"];
+			$desc=$r["description"];
+			$image=$r["image"];
+			$link=$r["video"];
+
 				}
 	}
 if(isset($_POST["submit"])){
 		$date=new DateTime();
 	$currentDate= $date->format('Y-m-d');
+//print_r($_POST);
+//die();
+	$file=$_FILES["file"];
+	$name=$file['name'];
+	$type=$file['type'];
+	$size=$file['size'];
+	$path=$file['tmp_name'];
+		echo $_POST["videoSrc"];
+	if($name!="" && ($type="image/jpeg||image/jpg") || $size<=6144000)
+	{
 
+		if(move_uploaded_file($path,'upload/'.$name))
+		{
 
-		$sql="INSERT INTO `tblcategory`(`data_id`, `categoryName`) VALUES ('".$_POST['type']."','".$_POST['name']."')";
+		$sql="INSERT INTO `tblcategorydata`(`title`, `category_name`, `image`, `description`, `video`, `storeDate`) VALUES ('".$_POST['name']."','".$_POST['category_name']."','".$name."','".$_POST["text"]."','".$_POST["videoSrc"]."','".$currentDate."')";
 	$res=mysqli_query($conn,$sql);
 	if($res)
 	{
@@ -27,6 +43,8 @@ if(isset($_POST["submit"])){
 	{
 		echo "error";
 		}
+		}
+	}
 		
 	}
 			
@@ -35,18 +53,40 @@ if(isset($_POST["submit"])){
 if(isset($_POST["update"])){
 	$date=new DateTime();
 			$currentDate= $date->format('Y-m-d');
-	$sql="UPDATE `tblcategory` SET `categoryName`='".$_POST['name']."',`data_id`='".$_POST["type"]."' WHERE `id`='".$_GET["id"]."'";
-				
-			$res=mysqli_query($conn,$sql);
-			if($res)
+	
+		$file=$_FILES["file"];
+		$name=$file['name'];
+		$type=$file['type'];
+		$size=$file['size'];
+		$path=$file['tmp_name'];
+				if($name=="")
 			{
-			header("Location:./ViewCategory.php");
-				exit();
+				$name=$image;
 			}
-			else
+		
+			
+		if($name!="" && ($type="image/jpeg") || $size<=614400)
+		{
+		
+	
+			if(move_uploaded_file($path,'upload/'.$name)  || file_exists('upload/'.$name))
 			{
-				echo "error";
+			
+			$sql="UPDATE `tblcategorydata` SET `title`='".$_POST['name']."',`category_name`='".$_POST['category_name']."',`description`='".$_POST["text"]."',`image`='".$name."',`video`='".$_POST["videoSrc"]."',`storeDate`='".$currentDate."' WHERE `id`='".$_GET["id"]."'";
+			
+		$res=mysqli_query($conn,$sql);
+		if($res)
+		{
+		header("Location:./ViewCategory.php");
+			exit();
+		}
+		else
+		{
+			echo "error";
 			}
+			}
+		}
+			
 				
 		}
 		if($_SESSION["username"]!=''){
@@ -118,7 +158,7 @@ var src = document.getElementById("videoSrc");
                             </div>
                             <div class="panel-heading hbuilt">
                                 <div class="p-xs">
-                                    <form method="post" id="form" class="form-horizontal">
+                                    <form method="post" id="form" class="form-horizontal" enctype="multipart/form-data">
                                         <div class="form-group">
                                             <label class="col-sm-1 control-label text-left">Title</label>
                                             <div class="col-sm-11">
@@ -126,29 +166,42 @@ var src = document.getElementById("videoSrc");
 												if(isset($_GET["id"])){ echo  $title ;}?>" class="form-control input-sm" >
                                             </div>
                                         </div>
-                                        <div class="form-group">
-                                            <label class="col-sm-1 control-label text-left">Type</label>
+										<div class="form-group">
+                                            <label class="col-sm-1 control-label text-left">Category</label>
                                             <div class="col-sm-11">
-                                          <select name="type" id="type"   class="form-control input-sm">
-		<option value="">Select Type of Blog</option>
-	<?php
-		$dataid="select * from tbltype";
-		$query=mysqli_query($conn,$dataid);
-		while($data=mysqli_fetch_array($query)){
-		echo "<option value=".$data['id'].">".$data['typeName']."</option>";
-		}
-		?>
-		</select>
+                                                <input type="text" name="category_name" value="<?php 
+												if(isset($_GET["id"])){ echo  $cate_name ;}?>" class="form-control input-sm" >
+                                            </div>
+                                        </div> 
+										<div class="form-group">
+                                            <label class="col-sm-1 control-label text-left">Image</label>
+                                            <div class="col-sm-11">
+                                              <input type="file" name="file" id="file" style="width:40%;
+		padding:10px;
+		margin-top:30px;
+		padding-left:40px;
+		font-size:16px;
+		font-family:raleway;
+		float:left;" onChange="putImage()"/>	
+		<img id="target" src='<?php if(isset($_GET["id"])){ echo "upload/".$image; }?>' style="width:150px;height:150px; margin-left:20px">
                                             </div>
                                         </div>
-								<!--		        	<div class="form-group">
+                                        <div class="form-group">
+                                            <label class="col-sm-1 control-label text-left">Video:</label>
+                                            <div class="col-sm-11">
+                                               <iframe id="video" style="width:30%"  src="<?php 
+											   if(isset($_GET["id"])){  echo $link; } ?>"></iframe></td><td>
+		<input id="videoSrc" name="videoSrc" placeholder="Video Link" type="text" value="<?php 
+		if(isset($_GET["id"])){ echo $link;} ?>"  onChange="fillVideo()" >
+                                            </div>
+                                        </div>
+										<div class="form-group">
 								 <div class="panel-body no-padding">
                                 <div class="summernote6" id="description" name="description">
-                                   <textarea style="width:100%;height:90%" name="description"><?php 
+                                   <textarea style="width:100%;height:90%" name="text"><?php 
 								   if(isset($_GET["id"])){ echo $desc; } ?></textarea>
                                 </div>
                             </div>
-						</div>-->
 						<div class="form-group">
 							 <div class="panel-footer">
 							  <input type="submit" class="btn btn-primary ft-compse" name="<?php 
