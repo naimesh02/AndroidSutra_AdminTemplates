@@ -38,7 +38,7 @@
                         <div class="sparkline13-list">
 						<div  style="background-color:#0B5790; border:thick; border-radius:50px; height:30px; width:200px; text-align:center; font-size:17px; color:#FFFFFF;right:0;position:absolute; margin-right :40px;">
 										
-										<a href="UpdateCategory.php"  style="color:#FFFFFF;">Add Record</a>
+										<a href="UpdateCategory.php" class="color:#FFFFFF; font-size:20px;">Add Record</a>
 										</div>
                             <div class="sparkline13-hd">
                                 <div class="main-sparkline13-hd">
