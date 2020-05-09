@@ -6,6 +6,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>Dashboard V.1 | jeweler - Material Admin Template</title>
     <meta name="description" content="">
+    <script type="text/javascript" src="style.css"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- favicon
 		============================================ -->
@@ -89,6 +90,7 @@
                                 <li><a title="Inbox" href="VisitorData.php?type=Beginners"><i class="fa fa-inbox sub-icon-mg" aria-hidden="true"></i> <span class="mini-sub-pro">Beginners</span></a></li>
                                 <li><a title="View Mail" href="VisitorData.php?type=Mediators"><i class="fa fa-television sub-icon-mg" aria-hidden="true"></i> <span class="mini-sub-pro">Mediators</span></a></li>
                                 <li><a title="Compose Mail" href="VisitorData.php?type=Advanced"><i class="fa fa-paper-plane sub-icon-mg" aria-hidden="true"></i> <span class="mini-sub-pro">Advanced</span></a></li>
+                                <li><a title="Compose Mail" href="ViewCategoryDetails.php?type=Advanced"><i class="fa fa-paper-plane sub-icon-mg" aria-hidden="true"></i> <span class="mini-sub-pro">CategoryDetails</span></a></li>
                             </ul>
                         </li>
                         <li>

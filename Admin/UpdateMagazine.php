@@ -1,4 +1,5 @@
   <link rel="stylesheet" href="css/summernote/summernote.css">
+  <script src="ckeditor/ckeditor.js"></script>
   	<?php 
 			include('conn.php');
 		session_start();	
@@ -29,7 +30,7 @@
 
 		if(move_uploaded_file($path,'upload/'.$name))
 		{
-		$sql="INSERT INTO `tblmagazine`(`magazineName`,`description`, `image`, `storeDate`) VALUES ('".$_POST["name"]."','".$_POST["description"]."','".$name."','".$currentDate."')";
+		$sql="INSERT INTO `tblmagazine`(`magazineName`,`description`, `image`, `storeDate`) VALUES ('".$_POST["name"]."','".$_POST["myeditor"]."','".$name."','".$currentDate."')";
 	$res=mysqli_query($conn,$sql);
 	if($res)
 	{
@@ -67,7 +68,7 @@ if(isset($_POST["update"])){
 				if(move_uploaded_file($path,'upload/'.$name) || file_exists('upload/'.$name) )
 				{
 		
-				$sql="UPDATE `tblmagazine` SET `magazineName`='".$_POST['name']."',`description`='".$_POST["description"]."',`image`='".$name."',`storeDate`='".$currentDate."' WHERE `id`='".$_GET["id"]."'";
+				$sql="UPDATE `tblmagazine` SET `magazineName`='".$_POST['name']."',`description`='".$_POST["myeditor"]."',`image`='".$name."',`storeDate`='".$currentDate."' WHERE `id`='".$_GET["id"]."'";
 				
 			$res=mysqli_query($conn,$sql);
 			if($res)
@@ -174,12 +175,8 @@ var src = document.getElementById("videoSrc");
                                             </div>
                                         </div>
                                   	<div class="form-group">
-								 <div class="panel-body no-padding">
-                                <div class="summernote6" id="description" name="description">
-                                   <textarea style="width:100%;height:90%" name="description"><?php 
-								   if(isset($_GET["id"])){ echo $desc; } ?></textarea>
-                                </div>
-                            </div>
+								  <textarea  name="myeditor" id="text"><?php 
+								   if(isset($_GET["id"])){ echo $desc; } ?></textarea> 
 						</div><div class="form-group">
 							 <div class="panel-footer">
 							  <input type="submit" class="btn btn-primary ft-compse" name="<?php 
@@ -187,6 +184,9 @@ var src = document.getElementById("videoSrc");
 							  if(isset($_GET["id"])){ echo "Update"; }else{ echo "Submit";} ?>" />
 							  </div>
 							  </div>
+							    <script type="text/javascript">
+		CKEDITOR.replace('myeditor');
+	</script>
                                     </form>
                                 </div>
                             </div>

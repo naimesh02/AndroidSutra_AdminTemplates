@@ -38,7 +38,7 @@
                         <div class="sparkline13-list">
 						<div  style="background-color:#0B5790; border:thick; border-radius:50px; height:30px; width:200px; text-align:center; font-size:17px; color:#FFFFFF;right:0;position:absolute; margin-right :40px;">
 										
-										<a href="UpdateCategory.php" class="color:#FFFFFF; font-size:20px;">Add Record</a>
+										<a href="UpdateCategory.php" class="addrecord">Add Record</a>
 										</div>
                             <div class="sparkline13-hd">
                                 <div class="main-sparkline13-hd">
@@ -55,7 +55,7 @@
                                                 <th data-field="state" data-checkbox="true"></th>
                                                 <th data-field="id">Title</th>
                                                 <th data-field="name" data-editable="true" >Category Name</th>
-												 <th data-field="name" data-editable="true">Description</th>
+												 <th data-field="name1" data-editable="true">Description</th>
                                                 <th data-field="company">Image</th>
                                                 <th data-field="price">Video</th>
 												<th data-field="date" data-editable="true">Date</th>
@@ -70,7 +70,8 @@
 							   $sql="SELECT * FROM `tblcategorydata`";
 							   $qry=mysqli_query($conn,$sql);
 							   while($res=mysqli_fetch_array($qry)){
-							   echo "<tr><td></td><td>".$res["title"]."</td><td>".$res["category_name"]."</td><td>".$res["description"]."</td>";?>
+							   echo "<tr><td></td><td>".$res["title"]."</td><td>".$res["category_name"]."</td>
+                               <td class='view-decription'>".$res["description"]."</td>";?>
 							   <td><img src="upload/<?php echo $res['image'];?>" style="width:100px;height:100px"/></td><td>
 							   <?php
 							   if($res['video']!='' || $res['video']!=null) {

@@ -3306,6 +3306,19 @@ div#sparklinehome canvas {
 }
 
 .addrecord:{
-background-color:#0B5790; border:thick; border-radius:50px; height:30px; width:200px; text-align:center; font-size:20px; color:#FFFFFF;right:10;position:absolute;
+background-color:#0B5790; 
+border:thick; 
+border-radius:50px; 
+height:30px; 
+width:200px; 
+text-align:center; 
+font-size:20px; 
+color:#FFFFFF !important;
+right:10;
+position:absolute;
 }
 
+
+.view-decription{
+	 width:20%;
+}

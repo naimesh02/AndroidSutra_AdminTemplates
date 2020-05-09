@@ -1,4 +1,5 @@
   <link rel="stylesheet" href="css/summernote/summernote.css">
+  <script src="ckeditor/ckeditor.js"></script>
   	<?php 
 			include('conn.php');
 		session_start();	
@@ -32,7 +33,7 @@ if(isset($_POST["submit"])){
 		if(move_uploaded_file($path,'upload/'.$name))
 		{
 
-		$sql="INSERT INTO `tblcategorydata`(`title`, `category_name`, `image`, `description`, `video`, `storeDate`) VALUES ('".$_POST['name']."','".$_POST['category_name']."','".$name."','".$_POST["text"]."','".$_POST["videoSrc"]."','".$currentDate."')";
+		$sql="INSERT INTO `tblcategorydata`(`title`, `category_name`, `image`, `description`, `video`, `storeDate`) VALUES ('".$_POST['name']."','".$_POST['category_name']."','".$name."','".$_POST["myeditor"]."','".$_POST["videoSrc"]."','".$currentDate."')";
 	$res=mysqli_query($conn,$sql);
 	if($res)
 	{
@@ -72,7 +73,7 @@ if(isset($_POST["update"])){
 			if(move_uploaded_file($path,'upload/'.$name)  || file_exists('upload/'.$name))
 			{
 			
-			$sql="UPDATE `tblcategorydata` SET `title`='".$_POST['name']."',`category_name`='".$_POST['category_name']."',`description`='".$_POST["text"]."',`image`='".$name."',`video`='".$_POST["videoSrc"]."',`storeDate`='".$currentDate."' WHERE `id`='".$_GET["id"]."'";
+			$sql="UPDATE `tblcategorydata` SET `title`='".$_POST['name']."',`category_name`='".$_POST['category_name']."',`description`='".$_POST["myeditor"]."',`image`='".$name."',`video`='".$_POST["videoSrc"]."',`storeDate`='".$currentDate."' WHERE `id`='".$_GET["id"]."'";
 			
 		$res=mysqli_query($conn,$sql);
 		if($res)
@@ -195,13 +196,16 @@ var src = document.getElementById("videoSrc");
 		if(isset($_GET["id"])){ echo $link;} ?>"  onChange="fillVideo()" >
                                             </div>
                                         </div>
-										<div class="form-group">
-								 <div class="panel-body no-padding">
+                                        <div class="form-group">
+										 <textarea  name="myeditor" id="text"><?php 
+								   if(isset($_GET["id"])){ echo $desc; } ?></textarea> 
+								 <!--<div class="panel-body no-padding">
                                 <div class="summernote6" id="description" name="description">
-                                   <textarea style="width:100%;height:90%" name="text"><?php 
-								   if(isset($_GET["id"])){ echo $desc; } ?></textarea>
+                                   <textarea style="width:100%;height:90%" name="text">
+								   </textarea>
                                 </div>
-                            </div>
+                            </div>-->
+						</div>
 						<div class="form-group">
 							 <div class="panel-footer">
 							  <input type="submit" class="btn btn-primary ft-compse" name="<?php 
@@ -209,6 +213,9 @@ var src = document.getElementById("videoSrc");
 							  if(isset($_GET["id"])){ echo "Update"; }else{ echo "Submit";} ?>" />
 							  </div>
 							  </div>
+							    <script type="text/javascript">
+		CKEDITOR.replace('myeditor');
+	</script>
                                     </form>
                                 </div>
                             </div>
