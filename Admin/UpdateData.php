@@ -18,8 +18,6 @@
 			
 	$date=new DateTime();
 	$currentDate= $date->format('Y-m-d');
-
-	
 	$file=$_FILES["file"];
 	$name=$file['name'];
 	$type=$file['type'];

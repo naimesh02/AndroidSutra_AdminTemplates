@@ -19,7 +19,9 @@
                                         <ul class="breadcome-menu">
                                             <li><a href="dashboard.php">Dashboard</a> <span class="bread-slash">/</span>
                                             </li>
-                                            <li><span class="bread-blod"><?php echo  $_GET['type'];?></span>
+                                            <li><span class="bread-blod"><?php 
+                                            // echo  $_GET['type'];
+                                            ?></span>
                                             </li>
                                         </ul>
 										
@@ -46,7 +48,7 @@
                         <div class="sparkline13-list">
 						<div  style="background-color:#0B5790; border:thick; border-radius:50px; height:30px; width:200px; text-align:center; font-size:17px; color:#FFFFFF;right:0;position:absolute; margin-right :40px;">
 										
-										<a href="UpdateData.php?type=<?php echo $_GET["type"]; ?>"  style="color:#FFFFFF;font-size:20px;">Add Record</a>
+										<a href="UpdateDetailData.php"  style="color:#FFFFFF;font-size:20px;">Add Record</a>
 										</div>
                             <div class="sparkline13-hd">
                                 <div class="main-sparkline13-hd">
@@ -76,11 +78,19 @@
                                         <tbody>
 										
                                             <?php
-							   $sql="SELECT * FROM `tbldata` WHERE  type = '".$_GET['type']."'";
+							   $sql="SELECT * FROM `tbldatadetail` WHERE  1";
 							   $qry=mysqli_query($conn,$sql);
 							   while($res=mysqli_fetch_array($qry)){
 							   echo "<tr><td></td><td>".$res["title"]."</td><td style='width:20% !important'>".$res["description"]."</td>";?>
-							   <td><img src="upload/<?php echo $res['image'];?>" style="width:600px;height:100px"/></td><td>
+							   <td>
+                                <?php
+                                if($res['image']!='' || $res['image']!=null)
+                                {
+                                    ?>
+                                <img src="upload/<?php echo $res['image'];?>" style="width:600px;height:100px"/></td>
+                                <?php 
+                            }
+                            ?><td>
 							   <?php
 							   if($res['videoLink']!='' || $res['videoLink']!=null) {
 							   echo "<iframe src=".$res["videoLink"]."  style='width:70px;height:70px'></iframe>";
@@ -105,7 +115,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="footer-copy-right">
-                            <p>Copyright © 2018 <a href="https://colorlib.com/wp/templates/">Colorlib</a> All rights reserved.</p>
+                            <p>Copyright Â© 2018 <a href="https://colorlib.com/wp/templates/">Colorlib</a> All rights reserved.</p>
                         </div>
                     </div>
                 </div>
