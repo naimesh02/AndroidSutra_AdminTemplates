@@ -1,4 +1,7 @@
   <link rel="stylesheet" href="css/summernote/summernote.css">
+  <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
   <script src="ckeditor/ckeditor.js"></script>
   	<?php 
 			include('conn.php');
@@ -217,7 +220,7 @@ var src = document.getElementById("videoSrc");
                                             </div>
                                         </div>
 										<div class="form-group">
-								 <textarea  name="myeditor" id="text"><?php 
+								 <textarea  name="myeditor" id="summernote"><?php 
 								   if(isset($_GET["id"])){ echo $desc; } ?></textarea> 
                             </div>
 						<div class="form-group">
@@ -227,10 +230,11 @@ var src = document.getElementById("videoSrc");
 							  if(isset($_GET["id"])){ echo "Update"; }else{ echo "Submit";} ?>" />
 							  </div>
 							  </div>
-							    <script type="text/javascript">
-		CKEDITOR.replace('myeditor');
-	</script>
-                                    </form>
+							    	<script>
+    $(document).ready(function() {
+        $('#summernote').summernote();
+    });
+  </script>    </form>
                                 </div>
                             </div>
                                            </div>

@@ -1,5 +1,9 @@
-  <link rel="stylesheet" href="css/summernote/summernote.css">
+  <!-- <link rel="stylesheet" href="css/summernote/summernote.css">   -->
+  <link href="summernote-master/dist/summernote.min.css" rel="stylesheet">
+<script src="summernote-master/dist/summernote.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
   <script src="ckeditor/ckeditor.js"></script>
+  
   	<?php 
 			include('conn.php');
 		session_start();	
@@ -187,14 +191,14 @@ var src = document.getElementById("videoSrc");
                                         </div>
 										
 										<div class="form-group">
-										 <textarea  name="myeditor" id="text"><?php 
+										 <textarea  name="myeditor" id="summernote"><?php 
 								   if(isset($_GET["id"])){ echo $desc; } ?></textarea> 
 								 <!--<div class="panel-body no-padding">
                                 <div class="summernote6" id="description" name="description">
                                    <textarea style="width:100%;height:90%" name="text">
 								   </textarea>
                                 </div>
-                            </div>-->
+                            </div>
 						</div>
 						<div class="form-group">
 							 <div class="panel-footer">
@@ -203,9 +207,15 @@ var src = document.getElementById("videoSrc");
 							  if(isset($_GET["id"])){ echo "Update"; }else{ echo "Submit";} ?>" />
 							  </div>
 							  </div>
-							  <script type="text/javascript">
+							 <!--  <script type="text/javascript">
 		CKEDITOR.replace('myeditor');
-	</script>
+	</script> -->
+	<script>
+    $(document).ready(function() {
+        $('#summernote').summernote({
+        	          placeholder: 'write here...'});
+    });
+  </script>
                                     </form>
                                 </div>
                             </div>
