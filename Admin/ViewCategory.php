@@ -72,7 +72,7 @@
 							   while($res=mysqli_fetch_array($qry)){
 							   echo "<tr><td></td><td>".$res["title"]."</td><td>".$res["category_name"]."</td>
                                <td class='view-decription'>".$res["description"]."</td>";?>
-							   <td><img src="upload/<?php echo $res['image'];?>" style="width:100px;height:100px"/></td><td>
+							   <td><img src="<?php echo $res['image'];?>" style="width:100px;height:100px"/></td><td>
 							   <?php
 							   if($res['video']!='' || $res['video']!=null) {
 							   echo "<iframe src=".$res["video"]."  style='width:70px;height:70px'></iframe>";

@@ -64,13 +64,13 @@
                                              <tr>
                                                 <th data-field="state" data-checkbox="true"></th>
                                                 <th data-field="id">Title</th>
-                                                <th data-field="name" style="width: 30% !important" data-editable="true" >Description</th>
+                                                <th data-field="name" data-editable="true" >Description</th>
                                                 <th data-field="company">Image</th>
                                                 <th data-field="price">Video</th>
 												
 												<!--<th data-field="task" data-editable="true">Status</th>
 												<th data-field="email" data-editable="true">Total Sales</th>
-                                               --> <th style="width:30%  !important;" data-field="action">Action</th>
+                                               --> <th style="width:30% ;" data-field="action">Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -79,8 +79,10 @@
 							   $sql="SELECT * FROM `tbldata` WHERE  type = '".$_GET['type']."'";
 							   $qry=mysqli_query($conn,$sql);
 							   while($res=mysqli_fetch_array($qry)){
-							   echo "<tr><td></td><td>".$res["title"]."</td><td style='width:20% !important'>".$res["description"]."</td>";?>
-							   <td><img src="upload/<?php echo $res['image'];?>" style="width:600px;height:100px"/></td><td>
+							   echo "<tr><td></td><td>".$res["title"]."</td>";
+                               ?>
+                               <td style="width:10%" class="view-decription"><?php echo $res["description"]; ?></td>
+							   <td><img src="<?php echo $res['image'];?>" style="width:100px;height:100px"/></td><td>
 							   <?php
 							   if($res['videoLink']!='' || $res['videoLink']!=null) {
 							   echo "<iframe src=".$res["videoLink"]."  style='width:70px;height:70px'></iframe>";

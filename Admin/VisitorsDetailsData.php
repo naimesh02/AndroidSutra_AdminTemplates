@@ -87,7 +87,7 @@
                                 if($res['image']!='' || $res['image']!=null)
                                 {
                                     ?>
-                                <img src="upload/<?php echo $res['image'];?>" style="width:600px;height:100px"/></td>
+                                <img src="<?php echo $res['image'];?>" style="width:600px;height:100px"/></td>
                                 <?php 
                             }
                             ?><td>

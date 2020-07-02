@@ -77,7 +77,7 @@
                                 $row=mysqli_fetch_assoc($q);
 
                                echo $row["title"]."</td><td class='view-decription'>".$res["description"]."</td>";?>
-                               <td><img src="upload/<?php echo $res['image'];?>" style="width:100px;height:100px"/></td><td>
+                               <td><img src="<?php echo $res['image'];?>" style="width:100px;height:100px"/></td><td>
                                <?php
                                if($res['videoLink']!='' || $res['videoLink']!=null) {
                                echo "<iframe src=".$res["videoLink"]."  style='width:70px;height:70px'></iframe>";

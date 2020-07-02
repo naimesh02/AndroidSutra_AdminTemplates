@@ -68,9 +68,34 @@
 				<li style="background-color:rgb(128,128,128,0.50)" ></li>
 				<li style="background-color:rgb(128,128,128,0.50)" ></li>
 				<li style="background-color:rgb(128,128,128,0.50)" ></li>
-				<listyle="background-color:rgb(128,128,128,0.50)"></li>
+				<li style="background-color:rgb(128,128,128,0.50)"></li>
 			</ul>
 		</div>
+
 		<!-- //main -->
 	</body>
+	   <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-app.js"></script>
+ 
+<script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-storage.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-auth.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-database.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-firestore.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-messaging.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-functions.js"></script>
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyDVhwLoEvBuEr7aIjX_KqjkZG3hVWiqiYM",
+    authDomain: "android-sutra.firebaseapp.com",
+    databaseURL: "https://android-sutra.firebaseio.com",
+    projectId: "android-sutra",
+    storageBucket: "android-sutra.appspot.com",
+    messagingSenderId: "886248667438",
+    appId: "1:886248667438:web:00c38770c730e7f33822bf",
+    measurementId: "G-E3SB8PYZDY"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+ </script>
 	</html>

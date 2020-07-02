@@ -34,13 +34,11 @@ if(isset($_POST["submit"])){
 	$size=$file['size'];
 	$path=$file['tmp_name'];
 		echo $_POST["videoSrc"];
-	if($name!="" && ($type="image/jpeg||image/jpg") || $size<=6144000)
-	{
-
-		if(move_uploaded_file($path,'upload/'.$name))
-		{
-
-		$sql="INSERT INTO `tblcategorydata`(`title`, `cateData_id`, `image`, `description`, `video`, `storeDate`) VALUES ('".$_POST['name']."','".$_POST['category_name']."','".$name."','".$_POST["myeditor"]."','".$_POST["videoSrc"]."','".$currentDate."')";
+	   if($_GET['imageUrl'])
+    $imagePath=$_GET['imageUrl']."&token=".$_GET['token'];
+else
+    $imagePath=null;
+		$sql="INSERT INTO `tblcategorydata`(`title`, `cateData_id`, `image`, `description`, `video`, `storeDate`) VALUES ('".$_POST['name']."','".$_POST['category_name']."','".$imagePath."','".$_POST["myeditor"]."','".$_POST["videoSrc"]."','".$currentDate."')";
 	$res=mysqli_query($conn,$sql);
 	if($res)
 	{
@@ -51,9 +49,7 @@ if(isset($_POST["submit"])){
 	{
 		echo "error";
 		}
-		}
-	}
-		
+	
 	}
 			
 			
@@ -71,16 +67,11 @@ if(isset($_POST["update"])){
 			{
 				$name=$image;
 			}
-		
-			
-		if($name!="" && ($type="image/jpeg") || $size<=614400)
-		{
-		
-	
-			if(move_uploaded_file($path,'upload/'.$name)  || file_exists('upload/'.$name))
-			{
-			
-			$sql="UPDATE `tblcategorydata` SET `title`='".$_POST['name']."',`cateData_id`='".$_POST['category_name']."',`description`='".$_POST["myeditor"]."',`image`='".$name."',`video`='".$_POST["videoSrc"]."',`storeDate`='".$currentDate."' WHERE `id`='".$_GET["id"]."'";
+		if($_GET['imageUrl'])
+    $imagePath=$_GET['imageUrl']."&token=".$_GET['token'];
+else
+    $imagePath=null;
+			$sql="UPDATE `tblcategorydata` SET `title`='".$_POST['name']."',`cateData_id`='".$_POST['category_name']."',`description`='".$_POST["myeditor"]."',`image`='".$imagePath."',`video`='".$_POST["videoSrc"]."',`storeDate`='".$currentDate."' WHERE `id`='".$_GET["id"]."'";
 			
 		$res=mysqli_query($conn,$sql);
 		if($res)
@@ -92,9 +83,7 @@ if(isset($_POST["update"])){
 		{
 			echo "error";
 			}
-			}
-		}
-			
+		
 				
 		}
 		if($_SESSION["username"]!=''){
@@ -207,8 +196,8 @@ var src = document.getElementById("videoSrc");
 		font-size:16px;
 		font-family:raleway;
 		float:left;" onChange="putImage()"/>	
-		<img id="target" src='<?php if(isset($_GET["id"])){ echo "upload/".$image; }?>' style="width:150px;height:150px; margin-left:20px">
-                                            </div>
+		<img id="target" src="<?php if(isset($_GET["id"]) && !isset($_GET['imageUrl'])) {echo $image;}elseif(isset($_GET['imageUrl'])){ echo  $_GET['imageUrl']; }?>" 
+        style="width:150px;height:150px; margin-left:20px">            </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-sm-1 control-label text-left">Video:</label>
@@ -254,6 +243,60 @@ var src = document.getElementById("videoSrc");
             </div>
         </div>
     </div>
+  <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-app.js"></script>
+ 
+<script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-storage.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-auth.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-database.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-firestore.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-messaging.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-functions.js"></script>
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyDVhwLoEvBuEr7aIjX_KqjkZG3hVWiqiYM",
+    authDomain: "android-sutra.firebaseapp.com",
+    databaseURL: "https://android-sutra.firebaseio.com",
+    projectId: "android-sutra",
+    storageBucket: "android-sutra.appspot.com",
+    messagingSenderId: "886248667438",
+    appId: "1:886248667438:web:00c38770c730e7f33822bf",
+    measurementId: "G-E3SB8PYZDY"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  var uploadImage=document.getElementById("file");
+  // alert(uploadImage);
+  uploadImage.addEventListener('change',function(e){
+    var files=e.target.files[0];
+    var storageRef=firebase.storage().ref('/'+files.name);
+        var task = storageRef.put(files);
+        // alert(files)
+        // var storage = firebase.storage();  
+        var imageUrls= function(file) {     storageRef.ref("images/" + files)       .getDownloadURL()       .then(function onSuccess(url) {         return url;       })       .catch(function onError(err) {         console.log("Error occured..." + err);       })   }
+        var imageUrl=storageRef.getDownloadURL().then(function onSuccess(url) 
+        {         
+            if((window.location.href).substring((window.location.href).length-3)!='php')
+            {
+                window.location.href = window.location.href+'&imageUrl='+url;
+            }
+            else{
+                // alert('hello')
+                window.location.href = window.location.href+'?imageUrl='+url;
+            }
+            
+            return url;      
+             })       
+        .catch(function onError(err) 
+            {         
+                console.log("Error occured..." + err);       
+            })  
+    console.log(imageUrl)
+    // alert(urls);
+    
+  })
+</script>
 
     <!-- jquery
 		============================================ -->

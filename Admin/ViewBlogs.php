@@ -71,7 +71,7 @@
 							   $qry=mysqli_query($conn,$sql);
 							   while($res=mysqli_fetch_array($qry)){
 							   echo "<tr><td></td><td>".$res["title"]."</td><td>".$res["description"]."</td>";?>
-							   <td><img src="upload/<?php echo $res['image'];?>" style="width:350px;height:100px"/></td><td><?php echo $res["type"];?></td>
+							   <td><img src="<?php echo $res['image'];?>" style="width:350px;height:100px"/></td><td><?php echo $res["type"];?></td>
 							  
 						<?php
 							   echo "</td><td>".$res['storeDate']."</td><td><a href=UpdateBlogs.php?id=".$res["id"]."><img src='Images/pencil.png'></a>&nbsp;&nbsp;&nbsp;<a href=deleteBlogs.php?id=".$res["id"]." onclick=\"return confirm('Are you sure to delete record?')\"><img src='Images/delete.png'></a></td></tr>";

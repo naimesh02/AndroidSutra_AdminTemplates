@@ -2,6 +2,12 @@
   <link href="summernote-master/dist/summernote.min.css" rel="stylesheet">
 <script src="summernote-master/dist/summernote.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+
   <script src="ckeditor/ckeditor.js"></script>
   
   	<?php 
@@ -14,8 +20,8 @@
 			$title=$r["title"];
 			$desc=$r["description"];
 			$image=$r["image"];
-			$link=$r["videoLink"];
 
+			$link=$r["videoLink"];
 			}
 			}
 			if(isset($_POST["submit"])){
@@ -27,13 +33,11 @@
 	$type=$file['type'];
 	$size=$file['size'];
 	$path=$file['tmp_name'];
-		
-	if($name!="" && ($type="image/jpeg") || $size<=6144000)
-	{
-
-		if(move_uploaded_file($path,'upload/'.$name))
-		{
-		$sql="INSERT INTO `tbldata`(`title`,`type`, `description`, `image`,`videoLink`, `storeDate`) VALUES ('".$_POST['name']."','".$_GET['type']."','".$_POST["myeditor"]."','".$name."','".$_POST["videoSrc"]."','".$currentDate."')";
+		if($_GET['imageUrl'])
+	$imagePath=$_GET['imageUrl']."&token=".$_GET['token'];
+else
+	$imagePath=null;
+		$sql="INSERT INTO `tbldata`(`title`,`type`, `description`, `image`,`videoLink`, `storeDate`) VALUES ('".$_POST['name']."','".$_GET['type']."','".$_POST["myeditor"]."','".$imagePath."','".$_POST["videoSrc"]."','".$currentDate."')";
 	$res=mysqli_query($conn,$sql);
 	if($res)
 	{
@@ -44,8 +48,7 @@
 	{
 		echo "error";
 		}
-		}
-	}
+	
 		
 	}
 			
@@ -65,16 +68,19 @@ if(isset($_POST["update"])){
 			{
 				$name=$image;
 			}
-		
 			
-		if($name!="" && ($type="image/jpeg") || $size<=614400)
-		{
+		// if($name!="" && ($type="image/jpeg") || $size<=614400)
+		// {
 		
 	
-			if(move_uploaded_file($path,'upload/'.$name)  || file_exists('upload/'.$name))
-			{
+		// 	if(move_uploaded_file($path,'upload/'.$name)  || file_exists('upload/'.$name))
+		// 	{
+			if($_GET['imageUrl'])
+	$imagePath=$_GET['imageUrl']."&token=".$_GET['token'];
+else
+	$imagePath=null;
 			
-			$sql="UPDATE `tbldata` SET `title`='".$_POST['name']."',`type`='".$_GET['type']."',`description`='".$_POST["myeditor"]."',`image`='".$name."',`videoLink`='".$_POST["videoSrc"]."',`storeDate`='".$currentDate."' WHERE `id`='".$_GET["id"]."'";
+			$sql="UPDATE `tbldata` SET `title`='".$_POST['name']."',`type`='".$_GET['type']."',`description`='".$_POST["myeditor"]."',`image`='".$imagePath."',`videoLink`='".$_POST["videoSrc"]."',`storeDate`='".$currentDate."' WHERE `id`='".$_GET["id"]."'";
 			
 		$res=mysqli_query($conn,$sql);
 		if($res)
@@ -85,9 +91,10 @@ if(isset($_POST["update"])){
 		else
 		{
 			echo "error";
+			exit();
 			}
-			}
-		}
+		// 	}
+		// }
 			
 		}
 		if($_SESSION["username"]!=''){
@@ -164,7 +171,7 @@ var src = document.getElementById("videoSrc");
                                             <label class="col-sm-1 control-label text-left">Title</label>
                                             <div class="col-sm-11">
                                                 <input type="text" name="name" value="<?php 
-												if(isset($_GET["id"])){ echo  $title ;}?>" class="form-control input-sm" >
+												if(isset($_GET["id"])){ echo  $title;}?>" class="form-control input-sm" >
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -176,8 +183,9 @@ var src = document.getElementById("videoSrc");
 		padding-left:40px;
 		font-size:16px;
 		font-family:raleway;
-		float:left;" onChange="putImage()"/>	
-		<img id="target" src='<?php if(isset($_GET["id"])){ echo "upload/".$image; }?>' style="width:150px;height:150px; margin-left:20px">
+		float:left;" />	
+		<img id="target" src="<?php if(isset($_GET["id"]) && !isset($_GET['imageUrl'])) {echo $image;}elseif(isset($_GET['imageUrl'])){ echo  $_GET['imageUrl']; }?>" 
+		style="width:150px;height:150px; margin-left:20px">
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -193,16 +201,11 @@ var src = document.getElementById("videoSrc");
 										<div class="form-group">
 										 <textarea  name="myeditor" id="summernote"><?php 
 								   if(isset($_GET["id"])){ echo $desc; } ?></textarea> 
-								 <!--<div class="panel-body no-padding">
-                                <div class="summernote6" id="description" name="description">
-                                   <textarea style="width:100%;height:90%" name="text">
-								   </textarea>
-                                </div>
-                            </div>
+								
 						</div>
 						<div class="form-group">
 							 <div class="panel-footer">
-							  <input type="submit" class="btn btn-primary ft-compse" name="<?php 
+							  <input type="submit" id="submit" class="btn btn-primary ft-compse" name="<?php 
 							  if(isset($_GET["id"])){echo "update"; }else{ echo "submit";}?>" value="<?php 
 							  if(isset($_GET["id"])){ echo "Update"; }else{ echo "Submit";} ?>" />
 							  </div>
@@ -236,6 +239,53 @@ var src = document.getElementById("videoSrc");
             </div>
         </div>
     </div>
+     <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-app.js"></script>
+ 
+<script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-storage.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-auth.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-database.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-firestore.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-messaging.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-functions.js"></script>
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyDVhwLoEvBuEr7aIjX_KqjkZG3hVWiqiYM",
+    authDomain: "android-sutra.firebaseapp.com",
+    databaseURL: "https://android-sutra.firebaseio.com",
+    projectId: "android-sutra",
+    storageBucket: "android-sutra.appspot.com",
+    messagingSenderId: "886248667438",
+    appId: "1:886248667438:web:00c38770c730e7f33822bf",
+    measurementId: "G-E3SB8PYZDY"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  var uploadImage=document.getElementById("file");
+  // alert(uploadImage);
+  uploadImage.addEventListener('change',function(e){
+  	var files=e.target.files[0];
+	var storageRef=firebase.storage().ref('/'+files.name);
+	 	var task = storageRef.put(files);
+	 	// alert(files)
+	 	// var storage = firebase.storage();  
+	 	var imageUrls= function(file) {     storageRef.ref("images/" + files)       .getDownloadURL()       .then(function onSuccess(url) {         return url;       })       .catch(function onError(err) {         console.log("Error occured..." + err);       })   }
+	 	var imageUrl=storageRef.getDownloadURL().then(function onSuccess(url) 
+	 	{         
+	 		// alert(url);
+	 		window.location.href = window.location.href+'&imageUrl='+url;
+	 		return url;      
+	 		 })       
+	 	.catch(function onError(err) 
+	 		{         
+	 			console.log("Error occured..." + err);       
+	 		})  
+	console.log(imageUrl)
+	// alert(urls);
+	
+  })
+</script>
 
     <!-- jquery
 		============================================ -->
