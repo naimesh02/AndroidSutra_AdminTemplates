@@ -229,15 +229,23 @@ var src = document.getElementById("videoSrc");
   };
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
+
   var uploadImage=document.getElementById("file");
-  // alert(uploadImage);
   uploadImage.addEventListener('change',function(e){
   	var files=e.target.files[0];
-	var storageRef=firebase.storage().ref('/'+files.name);
+	var storageRef=firebase.storage().ref('/'+ files.name);
 	 	var task = storageRef.put(files);
-	 	// alert(files)
-	 	// var storage = firebase.storage();  
-	 	var imageUrls= function(file) {     storageRef.ref("images/" + files)       .getDownloadURL()       .then(function onSuccess(url) {         return url;       })       .catch(function onError(err) {         console.log("Error occured..." + err);       })   }
+	 	
+	 	var imageUrls= function(file) {     
+	 	storageRef.ref("images/" + files)       
+	 	.getDownloadURL()       
+	 	.then(function onSuccess(url) {         
+	 		return url;       
+	 	})       
+	 	.catch(function onError(err) {        
+	 	 console.log("Error occured..." + err);      
+	 	  })  
+	 	}
 	 	var imageUrl=storageRef.getDownloadURL().then(function onSuccess(url) 
 	 	{         
 	 		

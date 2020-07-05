@@ -65,7 +65,7 @@
                                                 <th data-field="state" data-checkbox="true"></th>
                                                 <th data-field="id">Title</th>
                                                 <th data-field="name" data-editable="true" >Description</th>
-                                                <th data-field="company">Image</th>
+                                                <th data-field="company"><center>Image</center></th>
                                                 <th data-field="price">Video</th>
 												
 												<!--<th data-field="task" data-editable="true">Status</th>
@@ -79,10 +79,11 @@
 							   $sql="SELECT * FROM `tbldata` WHERE  type = '".$_GET['type']."'";
 							   $qry=mysqli_query($conn,$sql);
 							   while($res=mysqli_fetch_array($qry)){
-							   echo "<tr><td></td><td>".$res["title"]."</td>";
-                               ?>
-                               <td style="width:10%" class="view-decription"><?php echo $res["description"]; ?></td>
-							   <td><img src="<?php echo $res['image'];?>" style="width:100px;height:100px"/></td><td>
+							   echo "<tr><td></td>";?>
+                                <td class="view-decription" style="width:5% !important"><?php echo substr(strip_tags($res['title']),0,100) . "...";?></td>
+                        
+                               <td style="width:10%" class="view-decription"><?php echo substr(strip_tags($res['description']),0,300) . "..."; ?></td>
+							   <td><center><img src="<?php echo $res['image'];?>" style="width:100px;height:100px"/></center></td><td>
 							   <?php
 							   if($res['videoLink']!='' || $res['videoLink']!=null) {
 							   echo "<iframe src=".$res["videoLink"]."  style='width:70px;height:70px'></iframe>";

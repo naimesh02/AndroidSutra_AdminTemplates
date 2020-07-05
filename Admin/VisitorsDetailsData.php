@@ -81,7 +81,7 @@
 							   $sql="SELECT * FROM `tbldatadetail` WHERE  1";
 							   $qry=mysqli_query($conn,$sql);
 							   while($res=mysqli_fetch_array($qry)){
-							   echo "<tr><td></td><td>".$res["title"]."</td><td style='width:20% !important'>".$res["description"]."</td>";?>
+							   echo "<tr><td></td><td>".$res["title"]."</td><td style='width:20% !important'>".substr(strip_tags($res['description']),0,300) . "..."."</td>";?>
 							   <td>
                                 <?php
                                 if($res['image']!='' || $res['image']!=null)

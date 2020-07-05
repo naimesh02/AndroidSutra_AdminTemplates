@@ -70,8 +70,10 @@
 							   $sql="SELECT * FROM `tblmagazine` ";
 							   $qry=mysqli_query($conn,$sql);
 							   while($res=mysqli_fetch_array($qry)){
-							   echo "<tr><td></td><td>".$res["magazineName"]."</td><td class='view-decription'>".$res["description"]."</td>";?>
-							   <td><img src="<?php echo $res['image'];?>" style="width:350px;height:100px"/></td>
+							   echo "<tr><td></td><td>".$res["magazineName"]."</td>";?>
+                               <td style="width:10%" class="view-decription"><?php echo substr(strip_tags($res['description']),0,300) . "..."; ?></td>
+
+							   <td><center><img src="<?php echo $res['image'];?>" style="width:100px;height:100px"/></center></td>
 							  
 						<?php
 							   echo "</td><td>".$res['storeDate']."</td><td><a href=UpdateMagazine.php?id=".$res["id"]."><img src='Images/pencil.png'></a>&nbsp;&nbsp;&nbsp;<a href=deleteMagazine.php?id=".$res["id"]." onclick=\"return confirm('Are you sure to delete record?')\"><img src='Images/delete.png'></a></td></tr>";

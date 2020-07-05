@@ -55,7 +55,7 @@
                                                 <th data-field="state" data-checkbox="true"></th>
                                                 <th data-field="id">Title</th>
                                                 <th data-field="name" data-editable="true" >Description</th>
-                                                <th data-field="company">Image</th>
+                                                <th data-field="company"><center>Image</center></th>
                                                 <th data-field="price">Type</th>
 												<th data-field="date" data-editable="true">Date</th>
 												<!--<th data-field="task" data-editable="true">Status</th>
@@ -70,8 +70,10 @@
 							   $sql="SELECT * FROM `tblblogs` ";
 							   $qry=mysqli_query($conn,$sql);
 							   while($res=mysqli_fetch_array($qry)){
-							   echo "<tr><td></td><td>".$res["title"]."</td><td>".$res["description"]."</td>";?>
-							   <td><img src="<?php echo $res['image'];?>" style="width:350px;height:100px"/></td><td><?php echo $res["type"];?></td>
+							   echo "<tr><td></td><td>".$res["title"]."</td>";?>
+                               <td style="width:10%" class="view-decription"><?php echo substr(strip_tags($res['description']),0,300) . "..."; ?></td>
+
+							   <td><center><img src="<?php echo $res['image'];?>" style="width:100px;height:100px"/></center></td></td><td><?php echo $res["type"];?></td>
 							  
 						<?php
 							   echo "</td><td>".$res['storeDate']."</td><td><a href=UpdateBlogs.php?id=".$res["id"]."><img src='Images/pencil.png'></a>&nbsp;&nbsp;&nbsp;<a href=deleteBlogs.php?id=".$res["id"]." onclick=\"return confirm('Are you sure to delete record?')\"><img src='Images/delete.png'></a></td></tr>";

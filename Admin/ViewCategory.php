@@ -36,10 +36,10 @@
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="sparkline13-list">
-						<div  style="background-color:#0B5790; border:thick; border-radius:50px; height:30px; width:200px; text-align:center; font-size:17px; color:#FFFFFF;right:0;position:absolute; margin-right :40px;">
-										
-										<a href="UpdateCategory.php" class="addrecord">Add Record</a>
-										</div>
+						<div  style="background-color:#0B5790; border:thick; border-radius:50px; height:30px; width:200px; text-align:center; font-size:17px; color:#FFFFFF;right:0;position:absolute;  margin-right :40px;">
+                                        
+                                        <a href="UpdateCategory.php"  style="color:#FFFFFF; font-size:20px;">Add Record</a>
+                                        </div>
                             <div class="sparkline13-hd">
                                 <div class="main-sparkline13-hd">
                                     <h1>Category <span class="table-project-n">Data</span> Table</h1>
@@ -70,9 +70,13 @@
 							   $sql="SELECT * FROM `tblcategorydata`";
 							   $qry=mysqli_query($conn,$sql);
 							   while($res=mysqli_fetch_array($qry)){
-							   echo "<tr><td></td><td>".$res["title"]."</td><td>".$res["category_name"]."</td>
-                               <td class='view-decription'>".$res["description"]."</td>";?>
-							   <td><img src="<?php echo $res['image'];?>" style="width:100px;height:100px"/></td><td>
+							   echo "<tr><td></td>";?>
+                               <td class="view-decription" style="width:5% !important"><?php echo substr(strip_tags($res['title']),0,100) . "...";?></td>
+                               <?php echo "<td>".$res["category_name"]."</td>";?>
+                               <td style="width:10%" class="view-decription"><?php echo substr(strip_tags($res['description']),0,300) . "..."; ?></td>
+                               
+							   <td><center><img src="<?php echo $res['image'];?>" style="width:100px;height:100px"/></center>
+                               </td><td>
 							   <?php
 							   if($res['video']!='' || $res['video']!=null) {
 							   echo "<iframe src=".$res["video"]."  style='width:70px;height:70px'></iframe>";
