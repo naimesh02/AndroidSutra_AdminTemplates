@@ -67,7 +67,7 @@
                                                 <th data-field="name" data-editable="true" >Description</th>
                                                 <th data-field="company"><center>Image</center></th>
                                                 <th data-field="price">Video</th>
-												
+												<th data-field="link">Git Link</th>
 												<!--<th data-field="task" data-editable="true">Status</th>
 												<th data-field="email" data-editable="true">Total Sales</th>
                                                --> <th style="width:30% ;" data-field="action">Action</th>
@@ -88,6 +88,9 @@
 							   if($res['videoLink']!='' || $res['videoLink']!=null) {
 							   echo "<iframe src=".$res["videoLink"]."  style='width:70px;height:70px'></iframe>";
 							   } 
+                            
+                               echo "</td><td>".$res["gitLink"];
+                            
 							   echo "</td><td><a href=UpdateData.php?type=".$_GET['type']."&id=".$res["id"]."><img src='Images/pencil.png' style='width:30px;'></a>&nbsp;&nbsp;&nbsp;<a href=deleteData.php?type=".$_GET["type"]."&id=".$res["id"]." onclick=\"return confirm('Are you sure to delete record?')\"><img src='Images/delete.png'></a></td></tr>";
 							   }
 							   ?>

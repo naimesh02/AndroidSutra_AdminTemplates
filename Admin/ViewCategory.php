@@ -58,6 +58,7 @@
 												 <th data-field="name1" data-editable="true">Description</th>
                                                 <th data-field="company">Image</th>
                                                 <th data-field="price">Video</th>
+                                                <th data-field="link">Git Link</th>
 												<th data-field="date" data-editable="true">Date</th>
                                                
                                                <th data-field="action">Action</th>
@@ -81,6 +82,9 @@
 							   if($res['video']!='' || $res['video']!=null) {
 							   echo "<iframe src=".$res["video"]."  style='width:70px;height:70px'></iframe>";
 							   } 
+                            
+                               echo "</td><td>".$res["video"];
+                        
 							   echo "</td><td>".$res['storeDate']."</td><td><a href=Updatecategory.php?id=".$res["id"]."><img src='Images/pencil.png'></a>&nbsp;&nbsp;&nbsp;<a href=deletecategory.php?id=".$res["id"]." onclick=\"return confirm('Are you sure to delete record?')\"><img src='Images/delete.png'></a></td></tr>";
 							   }
 							   ?>

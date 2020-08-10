@@ -16,7 +16,7 @@
 			$desc=$r["description"];
 			$image=$r["image"];
 			$link=$r["video"];
-
+			$gitLink=$r["gitLink"];
 				}
 	}
 if(isset($_POST["submit"])){
@@ -29,14 +29,14 @@ if(isset($_POST["submit"])){
 	$type=$file['type'];
 	$size=$file['size'];
 	$path=$file['tmp_name'];
-		echo $_POST["videoSrc"];
+	
 	if($name!="" && ($type="image/jpeg||image/jpg") || $size<=6144000)
 	{
 
 		if(move_uploaded_file($path,'upload/'.$name))
 		{
 
-		$sql="INSERT INTO `tblcategorydata`(`title`, `category_name`, `image`, `description`, `video`, `storeDate`) VALUES ('".$_POST['name']."','".$_POST['category_name']."','".$name."','".$_POST["myeditor"]."','".$_POST["videoSrc"]."','".$currentDate."')";
+		$sql="INSERT INTO `tblcategorydata`(`title`, `category_name`, `image`, `description`, `video`, `storeDate`) VALUES ('".$_POST['name']."','".$_POST['category_name']."','".$name."','".$_POST["myeditor"]."','".$_POST["videoSrc"]."','".$_POST['gitLink']."','".$currentDate."')";
 	$res=mysqli_query($conn,$sql);
 	if($res)
 	{
@@ -76,7 +76,7 @@ if(isset($_POST["update"])){
 			if(move_uploaded_file($path,'upload/'.$name)  || file_exists('upload/'.$name))
 			{
 			
-			$sql="UPDATE `tblcategorydata` SET `title`='".$_POST['name']."',`category_name`='".$_POST['category_name']."',`description`='".$_POST["myeditor"]."',`image`='".$name."',`video`='".$_POST["videoSrc"]."',`storeDate`='".$currentDate."' WHERE `id`='".$_GET["id"]."'";
+			$sql="UPDATE `tblcategorydata` SET `title`='".$_POST['name']."',`category_name`='".$_POST['category_name']."',`description`='".$_POST["myeditor"]."',`image`='".$name."',`video`='".$_POST["videoSrc"]."',`gitLink`='".$_POST['gitLink']."',`storeDate`='".$currentDate."' WHERE `id`='".$_GET["id"]."'";
 			
 		$res=mysqli_query($conn,$sql);
 		if($res)
@@ -197,6 +197,13 @@ var src = document.getElementById("videoSrc");
 											   if(isset($_GET["id"])){  echo $link; } ?>"></iframe></td><td>
 		<input id="videoSrc" name="videoSrc" placeholder="Video Link" type="text" value="<?php 
 		if(isset($_GET["id"])){ echo $link;} ?>"  onChange="fillVideo()" >
+                                            </div>
+                                        </div>
+                                         <div class="form-group">
+                                            <label class="col-sm-1 control-label text-left">Git Link</label>
+                                            <div class="col-sm-11">
+                                                <input type="text" name="gitLink" value="<?php 
+												if(isset($_GET["id"])){ echo  $gitLink ;}?>" class="form-control input-sm" >
                                             </div>
                                         </div>
                                         <div class="form-group">

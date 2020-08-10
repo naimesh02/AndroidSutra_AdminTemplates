@@ -15,6 +15,7 @@
 			$desc=$r["description"];
 			$image=$r["image"];
 			$link=$r["videoLink"];
+			$gitLink=$r["gitLink"];
 
 			}
 			}
@@ -33,7 +34,7 @@
 
 		if(move_uploaded_file($path,'upload/'.$name))
 		{
-		$sql="INSERT INTO `tbldata`(`title`,`type`, `description`, `image`,`videoLink`, `storeDate`) VALUES ('".$_POST['name']."','".$_GET['type']."','".$_POST["myeditor"]."','".$name."','".$_POST["videoSrc"]."','".$currentDate."')";
+		$sql="INSERT INTO `tbldata`(`title`,`type`, `description`, `image`,`videoLink`,`gitLink`,`storeDate`) VALUES ('".$_POST['name']."','".$_GET['type']."','".$_POST["myeditor"]."','".$name."','".$_POST["videoSrc"]."','".$_POST['gitLink']."','".$currentDate."')";
 	$res=mysqli_query($conn,$sql);
 	if($res)
 	{
@@ -74,7 +75,7 @@ if(isset($_POST["update"])){
 			if(move_uploaded_file($path,'upload/'.$name)  || file_exists('upload/'.$name))
 			{
 			
-			$sql="UPDATE `tbldata` SET `title`='".$_POST['name']."',`type`='".$_GET['type']."',`description`='".$_POST["myeditor"]."',`image`='".$name."',`videoLink`='".$_POST["videoSrc"]."',`storeDate`='".$currentDate."' WHERE `id`='".$_GET["id"]."'";
+			$sql="UPDATE `tbldata` SET `title`='".$_POST['name']."',`type`='".$_GET['type']."',`description`='".$_POST["myeditor"]."',`image`='".$name."',`videoLink`='".$_POST["videoSrc"]."',`gitLink`='".$_POST['gitLink']."',`storeDate`='".$currentDate."' WHERE `id`='".$_GET["id"]."'";
 			
 		$res=mysqli_query($conn,$sql);
 		if($res)
@@ -189,7 +190,13 @@ var src = document.getElementById("videoSrc");
 		if(isset($_GET["id"])){ echo $link;} ?>"  onChange="fillVideo()" >
                                             </div>
                                         </div>
-										
+										 <div class="form-group">
+                                            <label class="col-sm-1 control-label text-left">Git Link</label>
+                                            <div class="col-sm-11">
+                                                <input type="text" name="gitLink" value="<?php 
+												if(isset($_GET["id"])){ echo  $gitLink ;}?>" class="form-control input-sm" >
+                                            </div>
+                                        </div>
 										<div class="form-group">
 										 <textarea  name="myeditor" id="summernote"><?php 
 								   if(isset($_GET["id"])){ echo $desc; } ?></textarea> 
