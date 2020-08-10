@@ -75,7 +75,7 @@
                                <?php echo "<td>".$res["category_name"]."</td>";?>
                                <td style="width:10%" class="view-decription"><?php echo substr(strip_tags($res['description']),0,300) . "..."; ?></td>
                                
-							   <td><center><img src="<?php echo $res['image'];?>" style="width:100px;height:100px"/></center>
+							   <td><center><img src="upload/<?php echo $res['image'];?>" style="width:100px;height:100px"/></center>
                                </td><td>
 							   <?php
 							   if($res['video']!='' || $res['video']!=null) {

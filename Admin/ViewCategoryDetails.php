@@ -79,7 +79,7 @@
                                echo $row["title"]."</td>";?>
                                <td style="width:10%" class="view-decription"><?php echo substr(strip_tags($res['description']),0,300) . "..."; ?></td>
 
-                               <td><img src="<?php echo $res['image'];?>" style="width:100px;height:100px"/></td><td>
+                               <td><img src="upload/<?php echo $res['image'];?>" style="width:100px;height:100px"/></td><td>
                                <?php
                                if($res['videoLink']!='' || $res['videoLink']!=null) {
                                echo "<iframe src=".$res["videoLink"]."  style='width:70px;height:70px'></iframe>";

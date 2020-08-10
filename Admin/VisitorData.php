@@ -83,7 +83,7 @@
                                 <td class="view-decription" style="width:5% !important"><?php echo substr(strip_tags($res['title']),0,100) . "...";?></td>
                         
                                <td style="width:10%" class="view-decription"><?php echo substr(strip_tags($res['description']),0,300) . "..."; ?></td>
-							   <td><center><img src="<?php echo $res['image'];?>" style="width:100px;height:100px"/></center></td><td>
+							   <td><center><img src="upload/<?php echo $res['image'];?>" style="width:100px;height:100px"/></center></td><td>
 							   <?php
 							   if($res['videoLink']!='' || $res['videoLink']!=null) {
 							   echo "<iframe src=".$res["videoLink"]."  style='width:70px;height:70px'></iframe>";

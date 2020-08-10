@@ -1,5 +1,4 @@
-<script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-app.js"></script>
-  <link rel="stylesheet" href="css/summernote/summernote.css">
+<link rel="stylesheet" href="css/summernote/summernote.css">
   <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -30,11 +29,12 @@ if(isset($_POST["submit"])){
 	$size=$file['size'];
 	$path=$file['tmp_name'];
 		
-	if($_GET['imageUrl'])
-	$imagePath=$_GET['imageUrl']."&token=".$_GET['token'];
-else
-	$imagePath=null;
-		$sql="INSERT INTO `tblblogs`(`title`,`type`, `description`, `image`,`storeDate`) VALUES ('".$_POST['name']."','".$_POST['type']."','".$_POST["myeditor"]."','".$imagePath."','".$currentDate."')";
+	if($name!="" && ($type="image/jpeg") || $size<=614400)
+	{
+
+		if(move_uploaded_file($path,'upload/'.$name))
+		{
+		$sql="INSERT INTO `tblblogs`(`title`,`type`, `description`, `image`,`storeDate`) VALUES ('".$_POST['name']."','".$_POST['type']."','".$_POST["myeditor"]."','".$name."','".$currentDate."')";
 	$res=mysqli_query($conn,$sql);
 	if($res)
 	{
@@ -45,7 +45,8 @@ else
 	{
 		echo "error";
 		}
-		
+		}
+	}
 	}
 			
 			
@@ -66,12 +67,17 @@ if(isset($_POST["update"])){
 				$name=$image;
 			}
 		
-		if($_GET['imageUrl'])
-	$imagePath=$_GET['imageUrl']."&token=".$_GET['token'];
-else
-	$imagePath=null;
+			
+			
+			if($name!="" && ($type="image/jpeg") || $size<=614400)
+			{
 		
-				$sql="UPDATE `tblblogs` SET `title`='".$_POST['name']."',`description`='".$_POST["myeditor"]."',`type`='".$_POST["type"]."',`image`='".$imagePath."',`storeDate`='".$currentDate."' WHERE `id`='".$_GET["id"]."'";
+		
+		
+				if(move_uploaded_file($path,'upload/'.$name) || file_exists('upload/'.$name) )
+				{
+		
+				$sql="UPDATE `tblblogs` SET `title`='".$_POST['name']."',`description`='".$_POST["myeditor"]."',`type`='".$_POST["type"]."',`image`='".$name."',`storeDate`='".$currentDate."' WHERE `id`='".$_GET["id"]."'";
 				
 			$res=mysqli_query($conn,$sql);
 			if($res)
@@ -81,10 +87,10 @@ else
 			}
 			else
 			{
-
 				echo "error";
 				}
-			
+				}
+			}
 		}
 		
 		if($_SESSION["username"]!=''){
@@ -185,9 +191,8 @@ var src = document.getElementById("videoSrc");
 		padding-left:40px;
 		font-size:16px;
 		font-family:raleway;
-		float:left;"/>	
-		<img id="target" src="<?php if(isset($_GET["id"]) && !isset($_GET['imageUrl'])) {echo $image;}elseif(isset($_GET['imageUrl'])){ echo  $_GET['imageUrl']; }?>" 
-		style="width:150px;height:150px; margin-left:20px">
+		float:left;" onChange="putImage()"/>	
+		<img id="target" src='<?php if(isset($_GET["id"])){ echo "upload/".$image; }?>' style="width:150px;height:150px; margin-left:20px">
                                             </div>
                                         </div>
                                   	<div class="form-group">
@@ -225,61 +230,6 @@ var src = document.getElementById("videoSrc");
             </div>
         </div>
     </div>
-
-  <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-app.js"></script>
- 
-<script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-storage.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-auth.js"></script>
-      <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-database.js"></script>
-      <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-firestore.js"></script>
-      <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-messaging.js"></script>
-      <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-functions.js"></script>
-
-<script>
-  // Your web app's Firebase configuration
-  var firebaseConfig = {
-    apiKey: "AIzaSyDVhwLoEvBuEr7aIjX_KqjkZG3hVWiqiYM",
-    authDomain: "android-sutra.firebaseapp.com",
-    databaseURL: "https://android-sutra.firebaseio.com",
-    projectId: "android-sutra",
-    storageBucket: "android-sutra.appspot.com",
-    messagingSenderId: "886248667438",
-    appId: "1:886248667438:web:00c38770c730e7f33822bf",
-    measurementId: "G-E3SB8PYZDY"
-  };
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
-  var uploadImage=document.getElementById("file");
-  // alert(uploadImage);
-  uploadImage.addEventListener('change',function(e){
-  	var files=e.target.files[0];
-	var storageRef=firebase.storage().ref('/'+files.name);
-	 	var task = storageRef.put(files);
-	 	//alert(files)
-	 	// var storage = firebase.storage();  
-	 	var imageUrls= function(file) {     storageRef.ref("images/" + files)       .getDownloadURL()       .then(function onSuccess(url) {         return url;       })       .catch(function onError(err) {         console.log("Error occured..." + err);       })   }
-	 	var imageUrl=storageRef.getDownloadURL().then(function onSuccess(url) 
-	 	{         
-	 		if((window.location.href).substring((window.location.href).length-3)!='php')
-	 		{
-	 			window.location.href = window.location.href+'&imageUrl='+url;
-	 		}
-	 		else{
-	 			// alert('hello')
-	 			window.location.href = window.location.href+'?imageUrl='+url;
-	 		}
-	 		
-	 		return url;      
-	 		 })       
-	 	.catch(function onError(err) 
-	 		{         
-	 			console.log("Error occured..." + err);       
-	 		})  
-	console.log(imageUrl)
-	// alert(urls);
-	
-  })
-</script>
 
     <!-- jquery
 		============================================ -->
