@@ -12,6 +12,7 @@
 		$row=mysqli_query($conn,$fetch);
 		while($r=mysqli_fetch_array($row)){
 			$title=$r["title"];
+			$seqNo=$r['sequenceNo'];
 			$desc=$r["description"];
 			$image=$r["image"];
 			$link=$r["videoLink"];
@@ -28,13 +29,16 @@
 	$type=$file['type'];
 	$size=$file['size'];
 	$path=$file['tmp_name'];
+	if($name==""){
+		return alert("Please select Image");
+	}
 		
 	if($name!="" && ($type="image/jpeg") || $size<=6144000)
 	{
 
 		if(move_uploaded_file($path,'upload/'.$name))
 		{
-		$sql="INSERT INTO `tbldata`(`title`,`type`, `description`, `image`,`videoLink`,`gitLink`,`storeDate`) VALUES ('".$_POST['name']."','".$_GET['type']."','".$_POST["myeditor"]."','".$name."','".$_POST["videoSrc"]."','".$_POST['gitLink']."','".$currentDate."')";
+		$sql="INSERT INTO `tbldata`(`title`,`sequenceNo`,`type`, `description`, `image`,`videoLink`,`gitLink`,`storeDate`) VALUES ('".$_POST['name']."','".$_POST['sequenceNo']."','".$_GET['type']."','".$_POST["myeditor"]."','".$name."','".$_POST["videoSrc"]."','".$_POST['gitLink']."','".$currentDate."')";
 	$res=mysqli_query($conn,$sql);
 	if($res)
 	{
@@ -75,7 +79,7 @@ if(isset($_POST["update"])){
 			if(move_uploaded_file($path,'upload/'.$name)  || file_exists('upload/'.$name))
 			{
 			
-			$sql="UPDATE `tbldata` SET `title`='".$_POST['name']."',`type`='".$_GET['type']."',`description`='".$_POST["myeditor"]."',`image`='".$name."',`videoLink`='".$_POST["videoSrc"]."',`gitLink`='".$_POST['gitLink']."',`storeDate`='".$currentDate."' WHERE `id`='".$_GET["id"]."'";
+			$sql="UPDATE `tbldata` SET `title`='".$_POST['name']."',`sequenceNo`='".$_POST['sequenceNo']."',`type`='".$_GET['type']."',`description`='".$_POST["myeditor"]."',`image`='".$name."',`videoLink`='".$_POST["videoSrc"]."',`gitLink`='".$_POST['gitLink']."',`storeDate`='".$currentDate."' WHERE `id`='".$_GET["id"]."'";
 			
 		$res=mysqli_query($conn,$sql);
 		if($res)
@@ -167,6 +171,15 @@ var src = document.getElementById("videoSrc");
                                                 <input type="text" name="name" value="<?php 
 												if(isset($_GET["id"])){ echo  $title ;}?>" class="form-control input-sm" >
                                             </div>
+
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-1 control-label text-left">Sequence</label>
+                                            <div class="col-sm-11">
+                                                <input type="Number" name="sequenceNo" placeholder="Enter Number Only" value="<?php 
+												if(isset($_GET["id"])){ echo  $title ;}?>" class="form-control input-sm" >
+                                            </div>
+                                            
                                         </div>
                                         <div class="form-group">
                                             <label class="col-sm-1 control-label text-left">Image</label>
